@@ -1,28 +1,27 @@
-# Author lt_hyunyong_ki in 2024 05 14
+# -*- coding: utf-8 -*-
+__author__ = 'gaeun'
 
-from PySide2 import QtWidgets, QtCore, QtGui
+from PySide2 import *
 
 class ItemModel():
     def __init__(self, data_dict={}):
-
-        self.name = data_dict.get("name")
-        self.age = data_dict.get("age")
-        self._class = data_dict.get("class")
-
+        self.files = data_dict.get("files")
+        self.type = data_dict.get("type")
+        self.date = data_dict.get("date")
 
 class CustomTableModel(QtCore.QAbstractTableModel):
-    HORIZONTAL_HEADERS = ["name", "age", "class", "id"]
+    HORIZONTAL_HEADERS = ["FILES", "FILE TYPE", "EDIT DATE"]
 
     def __init__(self, row_data=None, parent=None):
         super().__init__(parent)
 
-        self.entri_data = []
-        for _data in row_data:
-            item = ItemModel(data_dict=_data)
-            self.entri_data.append(item)
+        self.entry_data = []
+        for rdata in row_data:
+            item = ItemModel(data_dict=rdata)
+            self.entry_data.append(item)
 
     def rowCount(self, parent):
-        return len(self.entri_data)
+        return len(self.entry_data)
 
     def columnCount(self, parent):
         return len(self.HORIZONTAL_HEADERS)
@@ -38,15 +37,15 @@ class CustomTableModel(QtCore.QAbstractTableModel):
     def data(self, index, role):
         row = index.row()
         column = index.column()
-        item = self.entri_data[row]
+        item = self.entry_data[row]
 
         if role == QtCore.Qt.DisplayRole:
             if column == 0:
-                return item.name
+                return item.files
             elif column == 1:
-                return item.age
+                return item.type
             elif column == 2:
-                return item._class
+                return item.date
 
     def flags(self, index):
         return QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled
