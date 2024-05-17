@@ -42,8 +42,8 @@ class ExamMain(QtWidgets.QWidget):
         self.table_model = table_model.CustomTableModel(row_data=table_model_source)
         self.ui.tableView.setModel(self.table_model)
 
-        self.tree_model = tree_model.CustomTreeModel(row_data=tree_model_source)
-        self.ui.treeView.setModel(self.tree_model)
+        # self.tree_model = tree_model.CustomTreeModel(row_data=tree_model_source)
+        # self.ui.treeView.setModel(self.tree_model)
 
 
 def run_execute():
